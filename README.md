@@ -29,24 +29,29 @@ BAZAARIO is a multi-vendor platform built with the MERN stack (MongoDB, Express,
 
 1. Clone the repository
 ```
-git clone <repository-url>
-cd bazaario
+git clone https://github.com/wurtz-codez/bazario.git
+cd bazario
+```
+
+2. Install all dependencies at once
+```
 cd project
+npm run install-all
 ```
 
-2. Install server dependencies
+Or install dependencies individually:
+
 ```
-cd server
+# Install server dependencies
+cd project/server
 npm install
-```
 
-3. Install client dependencies
-```
+# Install client dependencies
 cd ../client
 npm install
 ```
 
-4. Set up environment variables
+3. Set up environment variables
 Create a `.env` file in the server directory with the following variables:
 ```
 PORT=5000
@@ -56,21 +61,34 @@ JWT_SECRET=your_jwt_secret
 
 ### Running the Application
 
+#### Easy Start (Recommended)
+Use our improved start script that runs both server and client with clickable terminal links:
+
+```
+cd project
+npm start
+```
+
+The terminal will display clickable links to access the application.
+
+#### Manual Start
+Alternatively, you can start the server and client manually:
+
 1. Start the server
 ```
-cd server
+cd project/server
 npm run dev
 ```
 
 2. Start the client
 ```
-cd ../client
+cd project/client
 npm start
 ```
 
 The application will be available at [http://localhost:3000](http://localhost:3000)
 
-Login Credentials
+### Login Credentials
 Email: demo@bazaario.com
 Password: password123
 Alternatively, you can register with any email and password since we've set up a mock registration function that will bypass the server.
