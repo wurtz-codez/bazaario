@@ -1,0 +1,2 @@
+# This file ensures the client directory is tracked by Git
+# Git does not track empty directories, so this file serves as a placeholder
