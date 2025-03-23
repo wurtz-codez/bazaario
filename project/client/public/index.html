@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#5271FF" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="BAZAARIO - Create and manage multiple websites for selling products"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -24,11 +24,93 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Bazaario - Multi-vendor Platform</title>
+    
+    <style>
+      /* Preload animation for app */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+      }
+      
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #f8f9fd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      .preloader-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .preloader-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #5271ff, #758bff);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 16px;
+        box-shadow: 0 6px 24px rgba(82, 113, 255, 0.3);
+        animation: pulse 1.5s infinite alternate;
+      }
+
+      .preloader-icon::after {
+        content: '';
+        display: block;
+        width: 24px;
+        height: 24px;
+        background-color: white;
+        clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        transform: rotate(180deg) translateY(-4px);
+      }
+
+      .preloader-text {
+        font-size: 20px;
+        font-weight: 600;
+        color: #5271ff;
+        letter-spacing: 0.5px;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(0.95);
+          box-shadow: 0 6px 24px rgba(82, 113, 255, 0.3);
+        }
+        100% {
+          transform: scale(1.05);
+          box-shadow: 0 12px 36px rgba(82, 113, 255, 0.5);
+        }
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      <div class="preloader">
+        <div class="preloader-content">
+          <div class="preloader-icon"></div>
+          <div class="preloader-text">Bazaario</div>
+        </div>
+      </div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
