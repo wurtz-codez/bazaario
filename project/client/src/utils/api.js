@@ -7,6 +7,7 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 export const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000, // 10 seconds timeout
+  withCredentials: true, // Enable sending cookies with requests
 });
 
 // Add response interceptor for better error handling
@@ -25,6 +26,7 @@ export const authAPI = (token) => {
   const instance = axios.create({
     baseURL: API_BASE_URL,
     timeout: 10000,
+    withCredentials: true, // Enable sending cookies with requests
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',

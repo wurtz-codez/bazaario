@@ -1,6 +1,7 @@
 const { spawn } = require('child_process');
 const path = require('path');
 const os = require('os');
+const fs = require('fs');
 
 // Colors for terminal output
 const colors = {
@@ -9,10 +10,26 @@ const colors = {
   green: '\x1b[32m',
   blue: '\x1b[34m',
   cyan: '\x1b[36m',
-  yellow: '\x1b[33m'
+  yellow: '\x1b[33m',
+  red: '\x1b[31m'
 };
 
 console.log(`${colors.bright}${colors.yellow}Starting Bazaario...${colors.reset}\n`);
+
+// Check if .env file exists, if not, create a default one
+const serverPath = path.join(__dirname, 'server');
+const envPath = path.join(serverPath, '.env');
+
+if (!fs.existsSync(envPath)) {
+  console.log(`${colors.yellow}No .env file found. Creating default .env file...${colors.reset}`);
+  const defaultEnv = 
+`PORT=5001
+MONGO_URI=mongodb://localhost:27017/bazaario
+JWT_SECRET=your_jwt_secret`;
+  
+  fs.writeFileSync(envPath, defaultEnv);
+  console.log(`${colors.green}Default .env file created at ${envPath}${colors.reset}`);
+}
 
 // Function to make terminal URLs clickable based on platform
 function clickableLink(url) {
@@ -30,8 +47,22 @@ function clickableLink(url) {
   }
 }
 
+// Read server port from .env file
+let serverPort = 5001; // Default port
+try {
+  const envContent = fs.readFileSync(envPath, 'utf8');
+  const portMatch = envContent.match(/PORT=(\d+)/);
+  if (portMatch && portMatch[1]) {
+    serverPort = parseInt(portMatch[1], 10);
+  }
+} catch (err) {
+  console.error(`${colors.red}Error reading .env file: ${err.message}${colors.reset}`);
+}
+
+// Display API URL
+console.log(`${colors.cyan}API will be available at: ${colors.reset}${clickableLink(`http://localhost:${serverPort}/api`)}\n`);
+
 // Start backend server
-const serverPath = path.join(__dirname, 'server');
 const server = spawn('npm', ['run', 'dev'], { cwd: serverPath, shell: true });
 
 server.stdout.on('data', (data) => {
@@ -58,6 +89,7 @@ setTimeout(() => {
       
       if (localUrl) {
         console.log(`\n${colors.bright}${colors.blue}🔗 Your app is running at: ${colors.reset}${clickableLink(localUrl)}`);
+        console.log(`${colors.bright}${colors.blue}🔗 API is available at: ${colors.reset}${clickableLink(`http://localhost:${serverPort}/api`)}`);
       }
       
       if (networkUrl) {
