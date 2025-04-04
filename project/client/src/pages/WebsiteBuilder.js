@@ -32,6 +32,17 @@ const createDefaultWebsite = (template) => ({
   description: '',
   domain: '',
   template: template._id,
+  contact: {
+    email: '',
+    address: '',
+    phone: ''
+  },
+  social: {
+    facebook: '',
+    instagram: '',
+    twitter: '',
+    youtube: ''
+  },
   settings: {
     colors: {
       primary: template?.settings?.colors?.primary || '#3f51b5',
@@ -222,6 +233,7 @@ const WebsiteBuilder = () => {
         >
           <Tab label="Basic Information" />
           <Tab label="Design" />
+          <Tab label="Contact & Social" />
           <Tab label="Preview" />
         </Tabs>
       </Paper>
@@ -376,6 +388,153 @@ const WebsiteBuilder = () => {
         </Box>
         
         <Box sx={{ display: activeTab === 2 ? 'block' : 'none' }}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Typography variant="h6" gutterBottom>
+                Contact Information
+              </Typography>
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Shop Email"
+                    name="contact.email"
+                    value={website.contact?.email || ''}
+                    onChange={(e) => {
+                      setWebsite({
+                        ...website,
+                        contact: {
+                          ...website.contact,
+                          email: e.target.value
+                        }
+                      });
+                    }}
+                    placeholder="your@email.com"
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Shop Address"
+                    name="contact.address"
+                    value={website.contact?.address || ''}
+                    onChange={(e) => {
+                      setWebsite({
+                        ...website,
+                        contact: {
+                          ...website.contact,
+                          address: e.target.value
+                        }
+                      });
+                    }}
+                    multiline
+                    rows={3}
+                    placeholder="Enter your shop's physical address"
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Phone Number"
+                    name="contact.phone"
+                    value={website.contact?.phone || ''}
+                    onChange={(e) => {
+                      setWebsite({
+                        ...website,
+                        contact: {
+                          ...website.contact,
+                          phone: e.target.value
+                        }
+                      });
+                    }}
+                    placeholder="Enter your contact number"
+                  />
+                </Grid>
+              </Grid>
+
+              <Typography variant="h6" sx={{ mt: 4, mb: 2 }}>
+                Social Media Links
+              </Typography>
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="Facebook URL"
+                    value={website.social?.facebook || ''}
+                    onChange={(e) => {
+                      setWebsite({
+                        ...website,
+                        social: {
+                          ...website.social,
+                          facebook: e.target.value
+                        }
+                      });
+                    }}
+                    placeholder="https://facebook.com/yourbusiness"
+                  />
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="Instagram URL"
+                    value={website.social?.instagram || ''}
+                    onChange={(e) => {
+                      setWebsite({
+                        ...website,
+                        social: {
+                          ...website.social,
+                          instagram: e.target.value
+                        }
+                      });
+                    }}
+                    placeholder="https://instagram.com/yourbusiness"
+                  />
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="Twitter URL"
+                    value={website.social?.twitter || ''}
+                    onChange={(e) => {
+                      setWebsite({
+                        ...website,
+                        social: {
+                          ...website.social,
+                          twitter: e.target.value
+                        }
+                      });
+                    }}
+                    placeholder="https://twitter.com/yourbusiness"
+                  />
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="YouTube Channel"
+                    value={website.social?.youtube || ''}
+                    onChange={(e) => {
+                      setWebsite({
+                        ...website,
+                        social: {
+                          ...website.social,
+                          youtube: e.target.value
+                        }
+                      });
+                    }}
+                    placeholder="https://youtube.com/c/yourbusiness"
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Box>
+
+        <Box sx={{ display: activeTab === 3 ? 'block' : 'none' }}>
           <Box sx={{ textAlign: 'center', py: 4 }}>
             <Typography variant="h6" gutterBottom>
               Preview Your Website
@@ -452,7 +611,7 @@ const WebsiteBuilder = () => {
           
           <Box sx={{ flex: '1 1 auto' }} />
           
-          {activeTab < 2 ? (
+          {activeTab < 3 ? (
             <Button 
               variant="contained"
               onClick={() => setActiveTab(activeTab + 1)}
