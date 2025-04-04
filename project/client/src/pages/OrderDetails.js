@@ -23,49 +23,6 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 import AuthContext from '../context/AuthContext';
 import { authAPI } from '../utils/api';
 
-// Mock data for development
-const mockOrder = {
-  _id: 'ORD123456',
-  customer: { 
-    name: 'John Doe', 
-    email: 'john@example.com',
-    address: '123 Main St, Anytown, USA',
-    phone: '555-123-4567'
-  },
-  items: [
-    {
-      _id: 'ITEM1',
-      name: 'Margherita Pizza',
-      quantity: 2,
-      price: 12.99,
-      total: 25.98
-    },
-    {
-      _id: 'ITEM2',
-      name: 'Caesar Salad',
-      quantity: 1,
-      price: 8.99,
-      total: 8.99
-    },
-    {
-      _id: 'ITEM3',
-      name: 'Soft Drink',
-      quantity: 2,
-      price: 2.99,
-      total: 5.98
-    }
-  ],
-  totalAmount: 40.95,
-  tax: 2.04,
-  shipping: 0,
-  status: 'delivered',
-  paymentMethod: 'Credit Card',
-  paymentStatus: 'paid',
-  website: { _id: '1', name: 'Pizza Palace' },
-  createdAt: new Date(Date.now() - 86400000), // 1 day ago
-  updatedAt: new Date(Date.now() - 43200000), // 12 hours ago
-};
-
 const OrderDetails = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
@@ -74,13 +31,6 @@ const OrderDetails = () => {
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
-      // For development, use mock data
-      setTimeout(() => {
-        setOrder(mockOrder);
-        setLoading(false);
-      }, 500);
-      
-      /* Real API implementation
       if (user?.token) {
         try {
           const api = authAPI(user.token);
@@ -92,7 +42,6 @@ const OrderDetails = () => {
           setLoading(false);
         }
       }
-      */
     };
 
     fetchOrderDetails();

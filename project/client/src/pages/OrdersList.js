@@ -21,34 +21,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import AuthContext from '../context/AuthContext';
 import { authAPI } from '../utils/api';
 
-// Mock data for development
-const mockOrders = [
-  {
-    _id: 'ORD123456',
-    customer: { name: 'John Doe', email: 'john@example.com' },
-    totalAmount: 42.99,
-    status: 'delivered',
-    website: { _id: '1', name: 'Pizza Palace' },
-    createdAt: new Date(Date.now() - 86400000), // 1 day ago
-  },
-  {
-    _id: 'ORD789012',
-    customer: { name: 'Jane Smith', email: 'jane@example.com' },
-    totalAmount: 89.50,
-    status: 'processing',
-    website: { _id: '2', name: 'Urban Fashion' },
-    createdAt: new Date(Date.now() - 172800000), // 2 days ago
-  },
-  {
-    _id: 'ORD345678',
-    customer: { name: 'Mike Johnson', email: 'mike@example.com' },
-    totalAmount: 129.99,
-    status: 'shipped',
-    website: { _id: '1', name: 'Pizza Palace' },
-    createdAt: new Date(Date.now() - 259200000), // 3 days ago
-  },
-];
-
 const OrdersList = () => {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
@@ -61,20 +33,6 @@ const OrdersList = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      // For development, use mock data
-      setTimeout(() => {
-        setOrders(mockOrders);
-        
-        // Extract unique websites from orders
-        const uniqueWebsites = [...new Map(mockOrders.map(order => 
-          [order.website._id, { id: order.website._id, name: order.website.name }]
-        )).values()];
-        setWebsites(uniqueWebsites);
-        
-        setLoading(false);
-      }, 500);
-      
-      /* Real API implementation
       if (user?.token) {
         try {
           const api = authAPI(user.token);
@@ -90,7 +48,6 @@ const OrdersList = () => {
           setLoading(false);
         }
       }
-      */
     };
 
     fetchOrders();
