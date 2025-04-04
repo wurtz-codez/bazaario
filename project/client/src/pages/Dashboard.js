@@ -24,74 +24,6 @@ import { getPreviewUrl } from '../utils/domainPreview';
 import AnimatedPage from '../components/AnimatedPage';
 import AnimatedItem from '../components/AnimatedItem';
 
-// Mock data for development
-const mockWebsites = [
-  {
-    _id: '1',
-    name: 'Pizza Palace',
-    domain: 'pizzapalace.bazaario.com',
-    description: 'A beautiful website for a local pizza restaurant with online ordering capabilities.',
-    template: { 
-      _id: '101', 
-      name: 'Restaurant Template', 
-      category: 'restaurant',
-      thumbnail: 'https://via.placeholder.com/300'
-    },
-  },
-  {
-    _id: '2',
-    name: 'Urban Fashion',
-    domain: 'urbanfashion.bazaario.com',
-    description: 'Modern clothing store with catalog and shopping cart functionality.',
-    template: { 
-      _id: '102', 
-      name: 'Fashion Store', 
-      category: 'clothing',
-      thumbnail: 'https://via.placeholder.com/300'
-    },
-  },
-];
-
-const mockOrders = [
-  {
-    _id: 'ORD123456',
-    customer: { name: 'John Doe', email: 'john@example.com' },
-    totalAmount: 42.99,
-    status: 'delivered',
-    website: { _id: '1', name: 'Pizza Palace' },
-    createdAt: new Date(Date.now() - 86400000), // 1 day ago
-  },
-  {
-    _id: 'ORD789012',
-    customer: { name: 'Jane Smith', email: 'jane@example.com' },
-    totalAmount: 89.50,
-    status: 'processing',
-    website: { _id: '2', name: 'Urban Fashion' },
-    createdAt: new Date(Date.now() - 172800000), // 2 days ago
-  },
-  {
-    _id: 'ORD345678',
-    customer: { name: 'Mike Johnson', email: 'mike@example.com' },
-    totalAmount: 129.99,
-    status: 'shipped',
-    website: { _id: '1', name: 'Pizza Palace' },
-    createdAt: new Date(Date.now() - 259200000), // 3 days ago
-  },
-];
-
-const mockAnalytics = [
-  {
-    website: { _id: '1', name: 'Pizza Palace' },
-    visitors: { total: 1245, daily: [] },
-    sales: { total: 87, daily: [] },
-  },
-  {
-    website: { _id: '2', name: 'Urban Fashion' },
-    visitors: { total: 983, daily: [] },
-    sales: { total: 42, daily: [] },
-  },
-];
-
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const [websites, setWebsites] = useState([]);
@@ -101,15 +33,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchDashboardData = async () => {
-      // Simulate API loading
-      setTimeout(() => {
-        setWebsites(mockWebsites);
-        setOrders(mockOrders);
-        setAnalytics(mockAnalytics);
-        setLoading(false);
-      }, 1000);
-
-      /* Original API code - commented out during development
       if (user?.token) {
         try {
           const api = authAPI(user.token);
@@ -128,7 +51,6 @@ const Dashboard = () => {
           setLoading(false);
         }
       }
-      */
     };
 
     fetchDashboardData();
